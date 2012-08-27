@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120827032215) do
+ActiveRecord::Schema.define(:version => 20120827033210) do
+
+  create_table "part_types", :force => true do |t|
+    t.string   "type_name",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "part_types", ["type_name"], :name => "index_part_types_on_type_name", :unique => true
 
   create_table "teams", :force => true do |t|
     t.string   "team_name",  :null => false
