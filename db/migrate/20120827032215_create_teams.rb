@@ -7,5 +7,7 @@ class CreateTeams < ActiveRecord::Migration
     end
 
     add_index :teams, :team_name, unique: true
+
+    Team.create!(id: 1, team_name: 'unknown')
   end
 end
