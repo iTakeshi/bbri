@@ -190,6 +190,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   mysql2
+  nokogiri
   pry-rails
   rails (= 3.2.8)
   rspec-rails
