@@ -1,4 +1,8 @@
 Bbri::Application.routes.draw do
+
+  get '/parts/register', to: 'parts#new'
+  post '/parts/register', to: 'parts#create'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
