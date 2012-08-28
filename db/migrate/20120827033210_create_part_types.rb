@@ -7,5 +7,7 @@ class CreatePartTypes < ActiveRecord::Migration
     end
 
     add_index :part_types, :type_name, unique: true
+
+    PartType.create!(id: 1, type_name: 'unknown')
   end
 end
