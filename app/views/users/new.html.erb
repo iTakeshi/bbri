@@ -1,0 +1,58 @@
+<h1>Sign Up!</h1>
+
+<%= form_for @user, url: '/signup', html: { class: 'form-horizontal' } do |f| %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-block alert-error">
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <h4>Signup failed.</h4>
+      <ul>
+        <% @user.errors.to_hash.each do |k, messages| %>
+          <% next unless [:team_id, :team, :user_name, :user_email, :password].include? k %>
+          <li><%= messages.last %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <div class="control-group">
+      <%= f.label :user_name, 'username',class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :user_name %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :user_email, 'email address',class: 'control-label' %>
+      <div class="controls">
+        <%= f.email_field :user_email %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :team_id, 'Select your team',class: 'control-label' %>
+      <div class="controls">
+        <%= f.collection_select :team_id, Team.order('lower(team_name) ASC'), :id, :team_name, prompt: 'select your team' %>
+        <p>The list ordered by alphabetically. If you don't belong to a team, select "unknown".</p>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :password, 'password',class: 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :password_confirmation, 'password_confirmation',class: 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password_confirmation %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit 'submit', class: 'btn btn-primary', data: { disable_with: 'submitting...' } %>
+    </div>
+  </fieldset>
+<% end %>
