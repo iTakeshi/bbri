@@ -1,0 +1,13 @@
+Dear <%= @user.user_name %>,
+
+Welcome to Biobrick Reviews & Issues!
+
+Please click following url to confirm your email address,
+and please enjoy Biobrick R&I!
+
+http://<%= @server_name %>/confirm/<%= @user.user_auth_token %>
+
+
+----------------------------------------------------------------
+This mail was automatically sent by BBRI user management system.
+Generated at <%= Time.now %>

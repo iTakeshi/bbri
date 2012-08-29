@@ -11,10 +11,19 @@ class UsersController < ApplicationController
     @user.generate_auth_token
     @user.user_status = 1
     if @user.save
-      # TODO email confirmation
+      @user.send_signup_confirmation
       redirect_to '/'
     else
       render :new
     end
+  end
+
+  # GET /confirm/:user_auth_token
+  def confirm
+    user = User.find_by_user_auth_token(params[:user_auth_token])
+    user.user_status = 0
+    user.save!
+    flash[:success] = 'Your Email address was successfully confirmed!'
+    redirect_to '/'
   end
 end

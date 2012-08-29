@@ -36,4 +36,8 @@ class User < ActiveRecord::Base
       self.user_auth_token = SecureRandom.urlsafe_base64(20)
     end while User.exists?(user_auth_token: self.user_auth_token)
   end
+
+  def send_signup_confirmation
+    UserMailer.confirm_signup(self).deliver
+  end
 end

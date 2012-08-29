@@ -5,6 +5,7 @@ Bbri::Application.routes.draw do
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
+  get '/confirm/:user_auth_token', to: 'users#confirm'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
