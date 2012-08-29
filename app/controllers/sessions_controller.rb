@@ -31,4 +31,12 @@ class SessionsController < ApplicationController
       render :new
     end
   end
+
+  # GET /logout
+  def delete
+    session[:user_auth_token] = nil
+    cookies.delete(:remember_me)
+    flash[:info] = 'Logout successful.'
+    redirect_to '/'
+  end
 end
