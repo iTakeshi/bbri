@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_filter :authorize, only: [:new, :create, :confirm]
 
   # GET /signup
   def new
