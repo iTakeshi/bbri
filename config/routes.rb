@@ -10,6 +10,8 @@ Bbri::Application.routes.draw do
   put '/profile', to: 'users#update'
   get '/profile/password', to: 'users#edit_password'
   post '/profile/password', to: 'users#update_password'
+  get '/signout', to: 'users#signout'
+  delete '/signout', to: 'users#delete'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

@@ -1,0 +1,46 @@
+<h1>Sign out</h1>
+
+<h3>Are you sure?</h3>
+<p>
+This operation can NOT be reverted.<br>
+If you are sure to delete your account and all your activity record, please fill following form and click 'signout'
+</p>
+
+<%= form_tag '/signout', class: 'form-horizontal', method: :delete do %>
+  <% if @error_msg %>
+    <div class="alert alert-block alert-error">
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <h4>Signup failed.</h4>
+      <ul>
+        <li><%= @error_msg %></li>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <div class="control-group">
+      <%= label_tag :user_email, 'email address',class: 'control-label' %>
+      <div class="controls">
+        <%= email_field_tag :user_email %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= label_tag :password, 'password',class: 'control-label' %>
+      <div class="controls">
+        <%= password_field_tag :password %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= label_tag :confirm_deletion, 'Are you sure to signout?', class: 'control-label' %>
+      <div class="controls">
+        <%= check_box_tag :confirm_deletion %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= submit_tag 'submit', class: 'btn btn-danger' %>
+    </div>
+  </fieldset>
+<% end %>

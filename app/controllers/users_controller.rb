@@ -67,4 +67,28 @@ class UsersController < ApplicationController
       render action: :edit_password
     end
   end
+
+  # GET /signout
+  def signout
+  end
+
+  # DELETE /signout
+  def delete
+    user = current_user
+    if user.user_email == params[:user_email] && user.authenticate(params[:password])
+      if params[:confirm_deletion]
+        user.delete
+        session[:user_auth_token] = nil
+        cookies.delete(:remember_me)
+        flash[:alert] = 'Account deleted.'
+        redirect_to '/'
+      else
+        @error_msg = 'check "Are you sure to signout?"'
+        render :signout
+      end
+    else
+      @error_msg = 'Invalid email address or password.'
+      render :signout
+    end
+  end
 end
