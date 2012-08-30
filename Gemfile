@@ -13,6 +13,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'pry-rails'
   gem 'spork'
+  gem 'guard-livereload'
 end
 
 group :production do
