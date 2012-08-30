@@ -27,4 +27,44 @@ class UsersController < ApplicationController
     flash[:success] = 'Your Email address was successfully confirmed!'
     redirect_to '/'
   end
+
+  # GET /profile
+  def edit
+    @user = current_user
+  end
+
+  # PUT /profile
+  def update
+    @user = current_user
+    @user.attributes = params[:user]
+    if @user.save
+      flash[:info] = 'Profile updated.'
+      redirect_to '/profile'
+    else
+      render :edit
+    end
+  end
+
+  # GET /profile/password
+  def edit_password
+  end
+
+  # POST /profile/password
+  def update_password
+    user = current_user
+    if user.authenticate(params[:current_password])
+      if params[:password] == params[:password_confirmation]
+        user.password = params[:password]
+        user.save!
+        flash[:info] = 'Password updated.'
+        redirect_to '/profile'
+      else
+        @error_msg = 'Password confirmation does not match.'
+        render action: :edit_password
+      end
+    else
+      @error_msg = 'Invalid current password.'
+      render action: :edit_password
+    end
+  end
 end

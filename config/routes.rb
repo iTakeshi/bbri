@@ -6,6 +6,10 @@ Bbri::Application.routes.draw do
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
   get '/confirm/:user_auth_token', to: 'users#confirm'
+  get '/profile', to: 'users#edit'
+  put '/profile', to: 'users#update'
+  get '/profile/password', to: 'users#edit_password'
+  post '/profile/password', to: 'users#update_password'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

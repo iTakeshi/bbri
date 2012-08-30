@@ -1,0 +1,51 @@
+<h1>Edit Profile</h1>
+
+<%= form_for @user, url: '/profile', html: { class: 'form-horizontal' } do |f| %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-block alert-error">
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <h4>failed to update profile.</h4>
+      <ul>
+        <% @user.errors.to_hash.each do |k, messages| %>
+          <% next unless [:team_id, :team, :user_name, :user_email, :password].include? k %>
+          <li><%= messages.last %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <div class="control-group">
+      <div class="controls">
+        <%= link_to 'edit password', '/profile/password' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :user_name, 'username',class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :user_name %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :user_email, 'email address',class: 'control-label' %>
+      <div class="controls">
+        <%= f.email_field :user_email, disabled: true %>
+        Email address cant't be editted.
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :team_id, 'Select your team',class: 'control-label' %>
+      <div class="controls">
+        <%= f.collection_select :team_id, Team.order('lower(team_name) ASC'), :id, :team_name, prompt: 'select your team' %>
+        <p>The list ordered by alphabetically. If you don't belong to a team, select "unknown".</p>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit 'submit', class: 'btn btn-primary', data: { disable_with: 'submitting...' } %>
+    </div>
+  </fieldset>
+<% end %>
