@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120827034819) do
+ActiveRecord::Schema.define(:version => 20120828214224) do
 
   create_table "part_types", :force => true do |t|
     t.string   "type_name",  :null => false
@@ -42,5 +42,20 @@ ActiveRecord::Schema.define(:version => 20120827034819) do
   end
 
   add_index "teams", ["team_name"], :name => "index_teams_on_team_name", :unique => true
+
+  create_table "users", :force => true do |t|
+    t.integer  "team_id",         :null => false
+    t.string   "user_name",       :null => false
+    t.string   "user_email",      :null => false
+    t.string   "user_auth_token", :null => false
+    t.integer  "user_status",     :null => false
+    t.string   "password_digest", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "users", ["user_auth_token"], :name => "index_users_on_user_auth_token", :unique => true
+  add_index "users", ["user_email"], :name => "index_users_on_user_email", :unique => true
+  add_index "users", ["user_name"], :name => "index_users_on_user_name", :unique => true
 
 end
