@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :authorize, only: [:new, :create, :confirm]
+  skip_before_filter :authorize, only: [:new, :create, :confirm, :reset_password, :send_new_password]
 
   # GET /signup
   def new
@@ -90,5 +90,19 @@ class UsersController < ApplicationController
       @error_msg = 'Invalid email address or password.'
       render :signout
     end
+  end
+
+  # GET /reset_password
+  def reset_password
+  end
+
+  # POST /reset_password
+  def send_new_password
+    user = User.find_by_user_email(params[:user_email])
+    user.password = SecureRandom.hex(4)
+    user.save!
+    user.send_resetting_password_confirmation
+    flash[:info] = 'Password resetting notification was successfully sent.'
+    redirect_to '/login'
   end
 end

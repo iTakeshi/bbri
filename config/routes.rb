@@ -12,6 +12,8 @@ Bbri::Application.routes.draw do
   post '/profile/password', to: 'users#update_password'
   get '/signout', to: 'users#signout'
   delete '/signout', to: 'users#delete'
+  get '/reset_password', to: 'users#reset_password'
+  post '/reset_password', to: 'users#send_new_password'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

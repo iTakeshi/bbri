@@ -40,4 +40,8 @@ class User < ActiveRecord::Base
   def send_signup_confirmation
     UserMailer.confirm_signup(self).deliver
   end
+
+  def send_resetting_password_confirmation
+    UserMailer.confirm_resetting_password(self).deliver
+  end
 end

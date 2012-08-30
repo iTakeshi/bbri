@@ -33,6 +33,10 @@
 
     <div class="form-actions">
       <%= submit_tag 'Login', class: 'btn btn-primary' %>
+      <div>
+        Are you new to Biobrick Reviews &amp; issues? please <%= link_to 'Sign up', '/signup' %><br>
+        <%= link_to 'Forget password?', '/reset_password' %>
+      </div>
     </div>
   </fieldset>
 <% end %>

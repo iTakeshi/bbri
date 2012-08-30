@@ -7,4 +7,10 @@ class UserMailer < ActionMailer::Base
     @server_name = bbri_server_name
     mail to: @user.user_email, subject: 'Biobrick R&I: Signup successful!'
   end
+
+  def confirm_resetting_password(user)
+    @user = user
+    @server_name = bbri_server_name
+    mail to: @user.user_email, subject: 'Biobrick R&I: Password resetted.'
+  end
 end
