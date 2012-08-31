@@ -30,4 +30,5 @@ private
       nil
     end
   end
+  helper_method :current_user
 end
