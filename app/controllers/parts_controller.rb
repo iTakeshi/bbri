@@ -58,4 +58,9 @@ class PartsController < ApplicationController
       # TODO search with LIKE query.
     end
   end
+
+  # GET /parts/:part_identifier
+  def show
+    @part = Part.find_by_part_identifier(params[:part_identifier])
+  end
 end
