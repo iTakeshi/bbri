@@ -19,6 +19,8 @@ Bbri::Application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#delete'
 
+  post '/search', to: 'parts#search'
+
   root to: 'ranking#index'
 
   # The priority is based upon order of creation:

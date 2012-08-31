@@ -48,4 +48,14 @@ class PartsController < ApplicationController
     end
     redirect_to '/'
   end
+
+  # POST /search
+  def search
+    part = Part.find_by_part_identifier("BBa_#{params[:navbar_search_query].gsub(/bba(\-|_)/i, '').upcase}")
+    if part
+      redirect_to "/parts/#{part.part_identifier}"
+    else
+      # TODO search with LIKE query.
+    end
+  end
 end
