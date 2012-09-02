@@ -1,0 +1,47 @@
+html {
+    overflow-y: scroll;
+}
+
+form {
+    margin-top: 30px;
+
+    .form-actions {
+        background: linear-gradient(top, #f5f5f5, #ffffff);
+        background: -webkit-linear-gradient(top, #f5f5f5, #ffffff);
+        background: -moz-linear-gradient(top, #f5f5f5, #ffffff);
+        background: -o-linear-gradient(top, #f5f5f5, #ffffff);
+        background: -ms-linear-gradient(top, #f5f5f5, #ffffff);
+    }
+}
+
+#grobal-footer {
+    .span12 {
+        position: relative;
+        text-align: center;
+        margin-top: 30px;
+        padding-top: 15px;
+        border-top: 1px solid #ddd;
+
+        address {
+            margin-top: 5px;
+        }
+
+        #grobal-footer-credits {
+            position: absolute;
+            top: 0; right: 10px;
+
+            ul {
+                list-style: none;
+
+                li {
+                    float: left;
+                    margin: 5px;
+                }
+
+                li#grobal-footer-rails {
+                    margin-top: 7px;
+                }
+            }
+        }
+    }
+}
