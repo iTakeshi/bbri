@@ -19,7 +19,7 @@ class PartsController < ApplicationController
     teams.each do |team|
       team_record = Team.where(team_name: team.children[0].text.strip).first_or_create
 
-      parts_page_url = team.attributes["href"].value
+      parts_page_url = team.attributes["href"].value.gsub(' ', '%20')
       parts_page = Nokogiri::HTML(open(parts_page_url))
       parts_tables = parts_page.css('.pgrouptable')
       next if parts_tables.empty?
