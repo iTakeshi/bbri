@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   belongs_to :team
+  has_many :reviews
   has_secure_password
   attr_accessible :team_id, :user_email, :user_name, :password, :password_confirmation
 

@@ -1,6 +1,7 @@
 class Part < ActiveRecord::Base
   belongs_to :team
   belongs_to :part_type
+  has_many :reviews
   attr_accessible :part_identifier, :part_type_id, :part_year, :team_id
 
   validates :team_id,

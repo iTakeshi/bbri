@@ -77,6 +77,9 @@ class UsersController < ApplicationController
     user = current_user
     if user.user_email == params[:user_email] && user.authenticate(params[:password])
       if params[:confirm_deletion]
+        user.reviews.each do |review|
+          review.delete
+        end
         user.delete
         session[:user_auth_token] = nil
         cookies.delete(:remember_me)

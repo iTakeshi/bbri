@@ -2,6 +2,8 @@ Bbri::Application.routes.draw do
 
   get '/parts/register', to: 'parts#new'
   post '/parts/register', to: 'parts#create'
+  post '/search', to: 'parts#search'
+  get 'parts/:part_identifier', to: 'parts#show'
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
@@ -18,6 +20,10 @@ Bbri::Application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#delete'
+
+  match '/parts/:part_identifier/user_review', to: 'reviews#create_or_update'
+
+  root to: 'ranking#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
