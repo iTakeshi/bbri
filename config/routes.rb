@@ -21,6 +21,8 @@ Bbri::Application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#delete'
 
+  match '/parts/:part_identifier/user_review', to: 'reviews#create_or_update'
+
   root to: 'ranking#index'
 
   # The priority is based upon order of creation:
