@@ -3,9 +3,21 @@
 <% if @right_part %>
   <h2>Are you feeling lucky?</h2>
   <h3><%= link_to @right_part.part_identifier, "/part/#{@right_part.part_identifier}" %></h3>
+
+  <h2>Other Search Resulut</h2>
 <% end %>
 
-<h2>Other Search Resulut</h2>
+<ul class="pager">
+  <% previous_enable = (@page > 1) %>
+  <li class="previous <%= previous_enable ? '' : 'disabled' %>">
+    <a href="<%= @pagenation_base_url %><%= previous_enable ? @page - 1 : @page %>">&larr;Previous</a>
+  </li>
+  <% next_enable = (@page < @page_max) %>
+  <li class="next <%= next_enable ? '' : 'disabled' %>">
+    <a href="<%= @pagenation_base_url %><%= next_enable ? @page + 1 : @page %>">Next&rarr;</a>
+  </li>
+</ul>
+
 <ul>
   <% @parts.each do |part| %>
     <li>
@@ -17,10 +29,10 @@
 <ul class="pager">
   <% previous_enable = (@page > 1) %>
   <li class="previous <%= previous_enable ? '' : 'disabled' %>">
-    <a href="/search?query=<%= @query %>&page=<%= previous_enable ? @page - 1 : @page %>">&larr;Previous</a>
+    <a href="<%= @pagenation_base_url %><%= previous_enable ? @page - 1 : @page %>">&larr;Previous</a>
   </li>
   <% next_enable = (@page < @page_max) %>
   <li class="next <%= next_enable ? '' : 'disabled' %>">
-    <a href="/search?query=<%= @query %>&page=<%= next_enable ? @page + 1 : @page %>">Next&rarr;</a>
+    <a href="<%= @pagenation_base_url %><%= next_enable ? @page + 1 : @page %>">Next&rarr;</a>
   </li>
 </ul>

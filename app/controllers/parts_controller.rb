@@ -51,13 +51,26 @@ class PartsController < ApplicationController
 
   # POST /search
   def search
-    @query = params[:query]
-    @right_part = Part.find_by_part_identifier("BBa_#{@query.gsub(/bba(\-|_)/i, '').upcase}")
-    all_parts = Part.where("part_identifier like ?", "%#{@query}%")
+    query = params[:query]
+    @right_part = Part.find_by_part_identifier("BBa_#{query.gsub(/bba(\-|_)/i, '').upcase}")
+    all_parts = Part.where("part_identifier like ?", "%#{query}%")
     @page = (params[:page] ? params[:page].to_i : 1)
     @page_max = (all_parts.count.to_f / 25).ceil
     @parts = all_parts.order('id DESC').offset(25 * (@page - 1)).limit(25)
-    @page_heading = "Search Result for \"#{@query}\""
+    @page_heading = "Search Result for \"#{query}\""
+    @pagenation_base_url = "/search?query=#{query}&page="
+    render :list
+  end
+
+  # GET /parts/team_parts/:team_name
+  def team_parts
+    @team = Team.find_by_team_name(params[:team_name])
+    all_parts = @team.parts
+    @page = (params[:page] ? params[:page].to_i : 1)
+    @page_max = (all_parts.count.to_f / 25).ceil
+    @parts = all_parts.order('id DESC').offset(25 * (@page - 1)).limit(25)
+    @page_heading = "Parts submitted by #{@team.team_name}"
+    @pagenation_base_url = "/parts/team_parts/#{@team.team_name}?page="
     render :list
   end
 
