@@ -48,9 +48,9 @@
     <li>
       <h4 class="review-heading"><%= review.review_title %></h4>
       <div class="review-body" data-review-id="<%= review.id %>">
-        <%= link_to raw('<i class="icon-thumbs-up"></i>'), "/review/#{review.id}/good", remote: true %>
+        <%= link_to raw('<i class="icon-thumbs-up"></i>'), "/reviews/#{review.id}/good", class: 'review-good', remote: true %>
         <span class="review-good-count"><%= review.good_count %></span>
-        <%= link_to raw('<i class="icon-thumbs-down"></i>'), "/review/#{review.id}/bad", remote: true %>
+        <%= link_to raw('<i class="icon-thumbs-down"></i>'), "/reviews/#{review.id}/bad", class: 'review-bad', remote: true %>
         <span class="review-bad-count"><%= review.bad_count %></span>
         <pre><%= review.review_text %></pre>
       </div>

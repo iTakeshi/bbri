@@ -23,6 +23,8 @@ Bbri::Application.routes.draw do
   get '/logout', to: 'sessions#delete'
 
   match '/parts/:part_identifier/user_review', to: 'reviews#create_or_update'
+  get '/reviews/:review_id/good', to: 'reviews#good'
+  get '/reviews/:review_id/bad', to: 'reviews#bad'
 
   get '/teams', to: 'teams#index'
 
