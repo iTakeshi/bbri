@@ -24,9 +24,9 @@
           <li class="<%= @team_page %>"><a href="/teams">Teams</a></li>
           <li class="<%= @type_page %>"><a href="/types">Types</a></li>
         </ul>
-        <%= form_tag '/search', class: 'navbar-search' do %>
-          <%= text_field_tag :navbar_search_query, nil, class: 'search-query', placeholder: 'Find a part by name' %>
-        <% end %>
+        <form action="/search" class="navbar-search", method="get">
+          <%= text_field_tag :query, nil, class: 'search-query', placeholder: 'Find parts by name' %>
+        </form>
         <ul class="nav pull-right">
           <li class="dropdown <%= @user_page %>" id="user-menu">
             <% user_name = ( current_user ? current_user.user_name : 'guest' ) %>

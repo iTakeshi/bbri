@@ -51,12 +51,14 @@ class PartsController < ApplicationController
 
   # POST /search
   def search
-    part = Part.find_by_part_identifier("BBa_#{params[:navbar_search_query].gsub(/bba(\-|_)/i, '').upcase}")
-    if part
-      redirect_to "/parts/#{part.part_identifier}"
-    else
-      # TODO search with LIKE query.
-    end
+    @query = params[:query]
+    @right_part = Part.find_by_part_identifier("BBa_#{@query.gsub(/bba(\-|_)/i, '').upcase}")
+    all_parts = Part.where("part_identifier like ?", "%#{@query}%")
+    @page = (params[:page] ? params[:page].to_i : 1)
+    @page_max = (all_parts.count.to_f / 25).ceil
+    @parts = all_parts.order('id DESC').offset(25 * (@page - 1)).limit(25)
+    @page_heading = "Search Result for \"#{@query}\""
+    render :list
   end
 
   # GET /parts/:part_identifier

@@ -2,7 +2,7 @@ Bbri::Application.routes.draw do
 
   get '/parts/register', to: 'parts#new'
   post '/parts/register', to: 'parts#create'
-  post '/search', to: 'parts#search'
+  get '/search', to: 'parts#search'
   get 'parts/:part_identifier', to: 'parts#show'
 
   get '/signup', to: 'users#new'
