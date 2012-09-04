@@ -6,5 +6,6 @@ class TeamsController < ApplicationController
     Team.all.each do |team|
       @teams["#{team.team_name}"] = team.parts.count
     end
+    @team_page = "active"
   end
 end
