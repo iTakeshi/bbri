@@ -44,9 +44,16 @@
 
 <h3>Hottest Reviews</h3>
 <ul id="reviews">
-  <% @part.reviews.order('id DESC').limit(10).each do |review| %>
+  <% @part.reviews.select('*, good_count / (bad_count + 1) AS score').order('score DESC').limit(10).each do |review| %>
     <li>
-      <h4><%= review.review_title %></h4>
+      <h4 class="review-heading"><%= review.review_title %></h4>
+      <div class="review-body" data-review-id="<%= review.id %>">
+        <%= link_to raw('<i class="icon-thumbs-up"></i>'), "/review/#{review.id}/good", remote: true %>
+        <span class="review-good-count"><%= review.good_count %></span>
+        <%= link_to raw('<i class="icon-thumbs-down"></i>'), "/review/#{review.id}/bad", remote: true %>
+        <span class="review-bad-count"><%= review.bad_count %></span>
+        <pre><%= review.review_text %></pre>
+      </div>
     </li>
   <% end %>
 </ul>
