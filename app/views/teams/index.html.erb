@@ -1,0 +1,7 @@
+<h1>Team List</h1>
+
+<ul>
+  <% @teams.each do |team_name, number_of_parts| %>
+    <li><%= link_to team_name, "/parts/team_parts/#{team_name}" %> (<%= number_of_parts %>)</li>
+  <% end %>
+</ul>

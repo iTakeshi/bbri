@@ -1,0 +1,59 @@
+<div class="row-fluid">
+  <div class="span4">
+    <h2>Hottest Reviews</h2>
+    <ul>
+      <% @hottest_reviews.each do |review| %>
+        <li>
+          <h3><%= review.part.part_identifier %>
+          <h4 class="review-heading"><%= review.review_title %></h4> by <%= review.user.user_name %>
+          <div class="review-body" data-review-id="<%= review.id %>">
+            <%= link_to raw('<i class="icon-thumbs-up"></i>'), "/reviews/#{review.id}/good", class: 'review-good', remote: true %>
+            <span class="review-good-count"><%= review.good_count %></span>
+            <%= link_to raw('<i class="icon-thumbs-down"></i>'), "/reviews/#{review.id}/bad", class: 'review-bad', remote: true %>
+            <span class="review-bad-count"><%= review.bad_count %></span>
+            <pre><%= review.review_text %></pre>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="span4">
+    <h2>Latest Reviews</h2>
+    <ul>
+      <% @latest_reviews.each do |review| %>
+        <li>
+          <h3><%= review.part.part_identifier %>
+          <h4 class="review-heading"><%= review.review_title %></h4> by <%= review.user.user_name %>
+          <div class="review-body" data-review-id="<%= review.id %>">
+            <%= link_to raw('<i class="icon-thumbs-up"></i>'), "/reviews/#{review.id}/good", class: 'review-good', remote: true %>
+            <span class="review-good-count"><%= review.good_count %></span>
+            <%= link_to raw('<i class="icon-thumbs-down"></i>'), "/reviews/#{review.id}/bad", class: 'review-bad', remote: true %>
+            <span class="review-bad-count"><%= review.bad_count %></span>
+            <pre><%= review.review_text %></pre>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="span4">
+    <h2>Random pickup</h2>
+    <ul>
+      <% @random_reviews.each do |review| %>
+        <li>
+          <h3><%= review.part.part_identifier %>
+          <h4 class="review-heading"><%= review.review_title %></h4> by <%= review.user.user_name %>
+          <div class="review-body" data-review-id="<%= review.id %>">
+            <%= link_to raw('<i class="icon-thumbs-up"></i>'), "/reviews/#{review.id}/good", class: 'review-good', remote: true %>
+            <span class="review-good-count"><%= review.good_count %></span>
+            <%= link_to raw('<i class="icon-thumbs-down"></i>'), "/reviews/#{review.id}/bad", class: 'review-bad', remote: true %>
+            <span class="review-bad-count"><%= review.bad_count %></span>
+            <pre><%= review.review_text %></pre>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+

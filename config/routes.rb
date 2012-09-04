@@ -2,8 +2,9 @@ Bbri::Application.routes.draw do
 
   get '/parts/register', to: 'parts#new'
   post '/parts/register', to: 'parts#create'
-  post '/search', to: 'parts#search'
-  get 'parts/:part_identifier', to: 'parts#show'
+  get '/search', to: 'parts#search'
+  get '/parts/:part_identifier', to: 'parts#show'
+  get '/parts/team_parts/:team_name', to: 'parts#team_parts'
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
@@ -22,6 +23,11 @@ Bbri::Application.routes.draw do
   get '/logout', to: 'sessions#delete'
 
   match '/parts/:part_identifier/user_review', to: 'reviews#create_or_update'
+  get '/reviews/:review_id/good', to: 'reviews#good'
+  get '/reviews/:review_id/bad', to: 'reviews#bad'
+  get '/reviews', to: 'reviews#index'
+
+  get '/teams', to: 'teams#index'
 
   root to: 'ranking#index'
 

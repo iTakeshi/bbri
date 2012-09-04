@@ -1,0 +1,38 @@
+<h1><%= @page_heading ? @page_heading : "Parts List" %></h1>
+
+<% if @right_part %>
+  <h2>Are you feeling lucky?</h2>
+  <h3><%= link_to @right_part.part_identifier, "/parts/#{@right_part.part_identifier}" %></h3>
+
+  <h2>Other Search Resulut</h2>
+<% end %>
+
+<ul class="pager">
+  <% previous_enable = (@page > 1) %>
+  <li class="previous <%= previous_enable ? '' : 'disabled' %>">
+    <a href="<%= @pagenation_base_url %><%= previous_enable ? @page - 1 : @page %>">&larr;Previous</a>
+  </li>
+  <% next_enable = (@page < @page_max) %>
+  <li class="next <%= next_enable ? '' : 'disabled' %>">
+    <a href="<%= @pagenation_base_url %><%= next_enable ? @page + 1 : @page %>">Next&rarr;</a>
+  </li>
+</ul>
+
+<ul>
+  <% @parts.each do |part| %>
+    <li>
+      <h3><%= link_to part.part_identifier, "/parts/#{part.part_identifier}" %></h3>
+    </li>
+  <% end %>
+</ul>
+
+<ul class="pager">
+  <% previous_enable = (@page > 1) %>
+  <li class="previous <%= previous_enable ? '' : 'disabled' %>">
+    <a href="<%= @pagenation_base_url %><%= previous_enable ? @page - 1 : @page %>">&larr;Previous</a>
+  </li>
+  <% next_enable = (@page < @page_max) %>
+  <li class="next <%= next_enable ? '' : 'disabled' %>">
+    <a href="<%= @pagenation_base_url %><%= next_enable ? @page + 1 : @page %>">Next&rarr;</a>
+  </li>
+</ul>
