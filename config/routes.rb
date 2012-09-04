@@ -25,6 +25,7 @@ Bbri::Application.routes.draw do
   match '/parts/:part_identifier/user_review', to: 'reviews#create_or_update'
   get '/reviews/:review_id/good', to: 'reviews#good'
   get '/reviews/:review_id/bad', to: 'reviews#bad'
+  get '/reviews', to: 'reviews#index'
 
   get '/teams', to: 'teams#index'
 

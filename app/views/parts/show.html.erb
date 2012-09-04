@@ -46,7 +46,7 @@
 <ul id="reviews">
   <% @part.reviews.select('*, good_count / (bad_count + 1) AS score').order('score DESC').limit(10).each do |review| %>
     <li>
-      <h4 class="review-heading"><%= review.review_title %></h4>
+      <h4 class="review-heading"><%= review.review_title %></h4> by <%= review.user.user_name %>
       <div class="review-body" data-review-id="<%= review.id %>">
         <%= link_to raw('<i class="icon-thumbs-up"></i>'), "/reviews/#{review.id}/good", class: 'review-good', remote: true %>
         <span class="review-good-count"><%= review.good_count %></span>
