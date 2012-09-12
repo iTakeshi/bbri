@@ -2,7 +2,11 @@ class ReviewsController < ApplicationController
 
   # GET /reviews
   def index
-    @random_reviews = Review.order('RANDOM()').limit(25)
+    if Rails.env == 'production'
+      @random_reviews = Review.order('RAND()').limit(25)
+    else
+      @random_reviews = Review.order('RANDOM()').limit(25)
+    end
     @latest_reviews = Review.order('id DESC').limit(25)
     @hottest_reviews = Review.order('good_counter DESC').limit(25)
   end
