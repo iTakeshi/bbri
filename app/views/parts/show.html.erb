@@ -1,52 +1,78 @@
 <h1><%= @part.part_identifier %></h1>
 
-<h3>Basic Information</h3>
-<dl class="dl-horizontal">
-  <dt>Year</dt><dd><%= @part.part_year %></dd>
-  <dt>Team</dt><dd><%= @part.team.team_name %></dd>
-  <dt>Type</dt><dd><%= @part.part_type.type_name %></dd>
-</dl>
+<div class="row-fluid">
+  <div class="span6">
+    <h3>Basic Information</h3>
+    <dl class="dl-horizontal">
+      <dt>Year</dt><dd><%= @part.part_year %></dd>
+      <dt>Team</dt><dd><%= @part.team.team_name %></dd>
+      <dt>Type</dt><dd><%= @part.part_type.type_name %></dd>
+    </dl>
 
-<a href="#new-review" id="new-review-btn" class="btn btn-primary" data-toggle="modal"><%= Review.where(user_id: current_user.id, part_id: @part.id).first ? 'Edit your review' : 'Post your review!' %></a>
-<div class="modal hide fade" id="new-review" style="margin: -290px 0 0 -400px; width: 800px; height: 580px;">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3>Post your review</h3>
-  </div>
-  <div class="modal-body">
-    <%= form_for Review.where(user_id: current_user.id, part_id: @part.id).first_or_initialize, url: "/parts/#{@part.part_identifier}/user_review", html: { class: 'form-horizontal', remote: true, id: 'new-review-form' } do |f| %>
-      <fieldset>
-        <div class="control-group">
-          <div class="controls alert alert-info">Both "Title" and "Text" are required.</div>
-        </div>
+    <a href="#new-review" id="new-review-btn" class="btn btn-primary" data-toggle="modal"><%= Review.where(user_id: current_user.id, part_id: @part.id).first ? 'Edit your review' : 'Post your review!' %></a>
 
-        <div class="control-group">
-          <%= f.label :review_title, 'Title of review', class: 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :review_title, style: 'width: 25em;' %>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <%= f.label :review_text, 'Review text', class: 'control-label' %>
-          <div class="controls">
-            <%= f.text_area :review_text, style: 'width: 40em; height: 15em;' %>
-          </div>
-        </div>
-
-        <div class="form-actions">
-          <%= f.submit 'submit', class: 'btn btn-primary' %>
-        </div>
-      </fieldset>
+    <% my_review = Review.where(user_id: current_user.id, part_id: @part.id).first %>
+    <% if my_review %>
+      <div id="my-review">
+        <h4><%= my_review.review_title %></h4>
+        <%= link_to raw('<i class="icon-thumbs-up"></i> Like '), "/review/#{my_review.id}/good", remote: true %>
+        <span class="review-good-count">0</span>
+        <pre><%= my_review.review_text %></pre>
+      </div>
+    <% else %>
+      <div id="my-review">
+      </div>
     <% end %>
+
+    <div class="modal hide fade" id="new-review" style="margin: -290px 0 0 -400px; width: 800px; height: 580px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>Post your review</h3>
+      </div>
+      <div class="modal-body">
+        <%= form_for Review.where(user_id: current_user.id, part_id: @part.id).first_or_initialize, url: "/parts/#{@part.part_identifier}/user_review", html: { class: 'form-horizontal', remote: true, id: 'my-review-form' } do |f| %>
+          <fieldset>
+            <div class="control-group">
+              <div class="controls alert alert-info">Both "Title" and "Text" are required.</div>
+            </div>
+
+            <div class="control-group">
+              <%= f.label :review_title, 'Title of review', class: 'control-label' %>
+              <div class="controls">
+                <%= f.text_field :review_title, style: 'width: 25em;' %>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <%= f.label :review_text, 'Review text', class: 'control-label' %>
+              <div class="controls">
+                <%= f.text_area :review_text, style: 'width: 40em; height: 15em;' %>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <%= f.submit 'submit', class: 'btn btn-primary' %>
+            </div>
+          </fieldset>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="span6">
+    <h3>Hottest Reviews</h3>
+    <ul id="reviews">
+      <% @part.reviews.order('id DESC').limit(10).each do |review| %>
+        <li>
+          <h4 class="review-heading"><%= review.review_title %></h4>
+          <div class="review-body">
+            <%= link_to raw('<i class="icon-thumbs-up"></i> Like '), "/review/#{review.id}/good", remote: true %>
+            <span class="review-good-count">0</span>
+            <span class="review-user"><%= review.user.user_name %></span>
+            <pre><%= review.review_text %></pre>
+          </div>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>
-
-<h3>Hottest Reviews</h3>
-<ul id="reviews">
-  <% @part.reviews.order('id DESC').limit(10).each do |review| %>
-    <li>
-      <h4><%= review.review_title %></h4>
-    </li>
-  <% end %>
-</ul>
