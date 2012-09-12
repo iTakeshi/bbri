@@ -11,4 +11,18 @@ class ReviewsController < ApplicationController
       render json: { status: :error }
     end
   end
+
+  # GET /reviews/:review_id/good
+  def good
+    review = Review.find(params[:review_id])
+    existing = GoodToReviews.where(review_id: review.id, user_id: current_user.id).first
+    if existing
+      existing.delete
+      review.increment(:good_counter).save!
+    else
+      GoodToReviews.create!(review_id: review.id, user_id: current_user.id)
+      review.decrement(:good_counter).save!
+    end
+    render json: { status: :success, good_counter: review.good_counter }
+  end
 end

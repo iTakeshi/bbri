@@ -15,8 +15,8 @@
     <% if my_review %>
       <div id="my-review">
         <h4><%= my_review.review_title %></h4>
-        <%= link_to raw('<i class="icon-thumbs-up"></i> Like '), "/review/#{my_review.id}/good", remote: true %>
-        <span class="review-good-count">0</span>
+        <%= link_to raw('<i class="icon-thumbs-up"></i> Like '), "/reviews/#{my_review.id}/good", remote: true, class: 'good-to-review' %>
+        <span class="review-good-count"><%= my_review.good_counter %></span>
         <pre><%= my_review.review_text %></pre>
       </div>
     <% else %>
@@ -62,12 +62,12 @@
   <div class="span6">
     <h3>Hottest Reviews</h3>
     <ul id="reviews">
-      <% @part.reviews.order('id DESC').limit(10).each do |review| %>
+      <% @part.reviews.order('good_counter DESC').limit(10).each do |review| %>
         <li>
           <h4 class="review-heading"><%= review.review_title %></h4>
           <div class="review-body">
-            <%= link_to raw('<i class="icon-thumbs-up"></i> Like '), "/review/#{review.id}/good", remote: true %>
-            <span class="review-good-count">0</span>
+            <%= link_to raw('<i class="icon-thumbs-up"></i> Like '), "/reviews/#{review.id}/good", remote: true, class: 'good-to-review' %>
+            <span class="review-good-count"><%= review.good_counter %></span>
             <span class="review-user"><%= review.user.user_name %></span>
             <pre><%= review.review_text %></pre>
           </div>

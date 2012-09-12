@@ -1,5 +1,5 @@
 class GoodToReviews < ActiveRecord::Base
-  belongs_to :review, counter_cache: :good_counter
+  belongs_to :review
   attr_accessible :review_id, :user_id
 
   validates :review_id,

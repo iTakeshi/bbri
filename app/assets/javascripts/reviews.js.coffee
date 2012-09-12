@@ -16,14 +16,14 @@ $ ->
                 if $('#my-review pre').length == 0
                     li = '<li><h4 class="review-heading">' + response.review.review_title + '</h4>' +
                         '<div class="review-body" data-review-id="' + response.review.id + '">' +
-                        '<a href="/review/' + response.review.id + '/good" data-remote="true"><i class="icon-thumbs-up"></i> Like </a>' +
-                        '<span class="review-good-count">0</span>' +
+                        '<a href="/reviews/' + response.review.id + '/good" data-remote="true"><i class="icon-thumbs-up"></i> Like </a>' +
+                        '<span class="review-good-count">' + response.review.good_counter + '</span>' +
                         '<pre>' + response.review.review_text + '</pre></div></li>'
                     $('#reviews').prepend(li)
                     $('#my-review-form').attr('method', 'put')
                 my_review = '<h4>' + response.review.review_title + '</h4>' +
-                    '<a href="/review/' + response.review.id + '/good" data-remote="true"><i class="icon-thumbs-up"></i> Like </a>' +
-                    '<span class="review-good-count">0</span>' +
+                    '<a href="/reviews/' + response.review.id + '/good" data-remote="true"><i class="icon-thumbs-up"></i> Like </a>' +
+                    '<span class="review-good-count">' + response.review.good_counter + '</span>' +
                     '<pre>' + response.review.review_text + '</pre>'
                 $('#my-review').html(my_review)
             else
@@ -32,3 +32,8 @@ $ ->
 
     $('.review-heading').live 'click', (event) ->
         $(@).next('.review-body').animate({ height: 'toggle', opacity: 'toggle' }, 'fast')
+
+    $('.good-to-review').on 'ajax:complete', (event, ajax, status) ->
+        response = $.parseJSON(ajax.responseText)
+        if response.status == 'success'
+            $(@).next('.review-good-count').text(response.good_counter)
