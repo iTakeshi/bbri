@@ -37,3 +37,7 @@ $ ->
         response = $.parseJSON(ajax.responseText)
         if response.status == 'success'
             $(@).next('.review-good-count').text(response.good_counter)
+            if response.operation == 'increment'
+                $(@).html('<i class="icon-thumbs-down"></i> Unlike ')
+            else
+                $(@).html('<i class="icon-thumbs-up"></i> Like ')
