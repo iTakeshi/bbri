@@ -1,5 +1,12 @@
 class ReviewsController < ApplicationController
 
+  # GET /reviews
+  def index
+    @random_reviews = Review.order('RANDOM()').limit(25)
+    @latest_reviews = Review.order('id DESC').limit(25)
+    @hottest_reviews = Review.order('good_counter DESC').limit(25)
+  end
+
   # MATCH /parts/:part_identifier/user_review
   def create_or_update
     review = Review.where(user_id: current_user.id, part_id: Part.find_by_part_identifier(params[:part_identifier]).id).first_or_initialize
