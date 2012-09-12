@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user.user_status = 1
     if @user.save
       @user.send_signup_confirmation
-      redirect_to '/'
+      redirect_to '/login'
     else
       render :new
     end
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     user.user_status = 0
     user.save!
     flash[:success] = 'Your Email address was successfully confirmed!'
-    redirect_to '/'
+    redirect_to '/login'
   end
 
   # GET /profile

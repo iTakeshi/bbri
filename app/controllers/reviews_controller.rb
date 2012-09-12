@@ -1,5 +1,16 @@
 class ReviewsController < ApplicationController
 
+  # GET /reviews
+  def index
+    if Rails.env == 'production'
+      @random_reviews = Review.order('RAND()').limit(25)
+    else
+      @random_reviews = Review.order('RANDOM()').limit(25)
+    end
+    @latest_reviews = Review.order('id DESC').limit(25)
+    @hottest_reviews = Review.order('good_counter DESC').limit(25)
+  end
+
   # MATCH /parts/:part_identifier/user_review
   def create_or_update
     review = Review.where(user_id: current_user.id, part_id: Part.find_by_part_identifier(params[:part_identifier]).id).first_or_initialize
@@ -10,5 +21,21 @@ class ReviewsController < ApplicationController
     else
       render json: { status: :error }
     end
+  end
+
+  # GET /reviews/:review_id/good
+  def good
+    review = Review.find(params[:review_id])
+    existing = GoodToReviews.where(review_id: review.id, user_id: current_user.id).first
+    if existing
+      existing.delete
+      review.increment(:good_counter).save!
+      operation = 'increment'
+    else
+      GoodToReviews.create!(review_id: review.id, user_id: current_user.id)
+      review.decrement(:good_counter).save!
+      operation = 'decrement'
+    end
+    render json: { status: :success, good_counter: review.good_counter, operation: operation }
   end
 end

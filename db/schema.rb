@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120902103730) do
+ActiveRecord::Schema.define(:version => 20120912101814) do
+
+  create_table "good_to_reviews", :force => true do |t|
+    t.integer  "review_id",  :null => false
+    t.integer  "user_id",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "part_types", :force => true do |t|
     t.string   "type_name",  :null => false
@@ -36,12 +43,13 @@ ActiveRecord::Schema.define(:version => 20120902103730) do
   add_index "parts", ["team_id"], :name => "index_parts_on_team_id"
 
   create_table "reviews", :force => true do |t|
-    t.integer  "part_id",      :null => false
-    t.integer  "user_id",      :null => false
-    t.string   "review_title", :null => false
-    t.text     "review_text",  :null => false
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer  "part_id",                     :null => false
+    t.integer  "user_id",                     :null => false
+    t.string   "review_title",                :null => false
+    t.text     "review_text",                 :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "good_counter", :default => 0, :null => false
   end
 
   add_index "reviews", ["part_id"], :name => "index_reviews_on_part_id"
