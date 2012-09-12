@@ -46,3 +46,4 @@ namespace :deploy do
 end
 
 require 'bundler/capistrano'
+load 'deploy/assets'
