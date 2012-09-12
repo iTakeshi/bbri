@@ -44,6 +44,35 @@
 
 <div class="container-fluid">
 
+<% if flash[:error] %>
+  <div id="flash-error" class="alert alert-error">
+    <button class="close" data-dismiss="alert">×</button>
+    <i class="icon-remove-sign"></i>
+    <%= flash[:error] %>
+  </div>
+<% end %>
+<% if flash[:warning] %>
+  <div id="flash-error" class="alert">
+    <button class="close" data-dismiss="alert">×</button>
+    <i class="icon-info-sign"></i>
+    <%= flash[:warning] %>
+  </div>
+<% end %>
+<% if flash[:info] %>
+  <div id="flash-info" class="alert alert-info">
+    <button class="close" data-dismiss="alert">×</button>
+    <i class="icon-info-sign"></i>
+    <%= flash[:info] %>
+  </div>
+<% end %>
+<% if flash[:success] %>
+  <div id="flash-info" class="alert alert-success">
+    <button class="close" data-dismiss="alert">×</button>
+    <i class="icon-ok-sign"></i>
+    <%= flash[:success] %>
+  </div>
+<% end %>
+
 <%= yield %>
 
 <footer id="grobal-footer" class="row-fluid">
