@@ -29,12 +29,12 @@ class ReviewsController < ApplicationController
     existing = GoodToReviews.where(review_id: review.id, user_id: current_user.id).first
     if existing
       existing.delete
-      review.increment(:good_counter).save!
-      operation = 'increment'
-    else
-      GoodToReviews.create!(review_id: review.id, user_id: current_user.id)
       review.decrement(:good_counter).save!
       operation = 'decrement'
+    else
+      GoodToReviews.create!(review_id: review.id, user_id: current_user.id)
+      review.increment(:good_counter).save!
+      operation = 'increment'
     end
     render json: { status: :success, good_counter: review.good_counter, operation: operation }
   end
