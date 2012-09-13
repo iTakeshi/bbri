@@ -7,6 +7,7 @@
       <dt>Year</dt><dd><%= @part.part_year %></dd>
       <dt>Team</dt><dd><%= @part.team.team_name %></dd>
       <dt>Type</dt><dd><%= @part.part_type.type_name %></dd>
+      <dt>parts registry</dt><dd><%= link_to "http://partsregistry.org/Part:#{@part.part_identifier}", "http://partsregistry.org/Part:#{@part.part_identifier}" %>
     </dl>
 
     <a href="#new-review" id="new-review-btn" class="btn btn-primary" data-toggle="modal"><%= Review.where(user_id: current_user.id, part_id: @part.id).first ? 'Edit your review' : 'Post your review!' %></a>
