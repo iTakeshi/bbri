@@ -38,4 +38,14 @@ class ReviewsController < ApplicationController
     end
     render json: { status: :success, good_counter: review.good_counter, operation: operation }
   end
+
+  # GET /reviews/my_reviews
+  def my_reviews
+    @user = current_user
+    all_reviews = @user.reviews
+    @page = ( params[:page] ? params[:page].to_i : 1 )
+    @page_max = (all_reviews.count.to_f / 25).ceil
+    @reviews = all_reviews.order('id DESC').offset(25 * (@page - 1)).limit(25)
+    @pagenation_base_url = "/reviews/my_reviews?page="
+  end
 end

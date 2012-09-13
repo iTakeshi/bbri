@@ -26,6 +26,7 @@ Bbri::Application.routes.draw do
 
   get '/reviews', to: 'reviews#index'
   get '/reviews/:review_id/good', to: 'reviews#good'
+  get '/reviews/my_reviews', to: 'reviews#my_reviews'
 
   get '/teams', to: 'teams#index'
 
