@@ -65,7 +65,7 @@
     <h3>Hottest Reviews</h3>
     <% @reviews = @part.reviews.order('good_counter DESC').limit(10) %>
     <ul id="reviews">
-      <%= render partial: @reviews, locals: { hide_part_identifier: true } %>
+      <%= render partial: @reviews %>
     </ul>
   </div>
 </div>
