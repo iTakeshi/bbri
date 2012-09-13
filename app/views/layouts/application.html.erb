@@ -29,7 +29,7 @@
         <ul class="nav pull-right">
           <li class="dropdown <%= @user_page %>" id="user-menu">
             <% user_name = ( current_user ? current_user.user_name : 'guest' ) %>
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i><%= user_name %><span class="caret"></span></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i><span id="current-user-name"><%= user_name %></span><span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><%= link_to 'Edit user profile', '/profile' %></li>
               <li><%= link_to 'my reviews', '/reviews/my_reviews' %></li>
