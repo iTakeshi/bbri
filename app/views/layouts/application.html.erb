@@ -1,14 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bbri</title>
+  <title><%= @page_title ? "#{@page_title} - " : "" %>Biobrick Reviews & Issues</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--[if lt IE 9]>
+  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 </head>
 <body>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="brand" href="/">Biobrick Reviews & Issues</a>
+      <nav class="nav-collapse collapse">
+        <ul class="nav">
+          <li class="<%= @score_ranking_page %>"><a href="/">Score Ranking</a></li>
+          <li class="<%= @hot_parts_page %>"><a href="/hot_parts">Hot Parts</a></li>
+          <li class="<%= @review_ranking_page %>"><a href="/reviews">Hot Reviews</a></li>
+          <li class="<%= @issue_ranking_page %>"><a href="/issues">Hot Issues</a></li>
+          <li class="<%= @team_page %>"><a href="/teams">Teams</a></li>
+        </ul>
+        <form action="/search" class="navbar-search", method="get">
+          <%= text_field_tag :query, nil, class: 'search-query', placeholder: 'Find parts by name' %>
+        </form>
+        <ul class="nav pull-right">
+          <li class="dropdown <%= @user_page %>" id="user-menu">
+            <% user_name = ( current_user ? current_user.user_name : 'guest' ) %>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i><span id="current-user-name"><%= user_name %></span><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Edit user profile', '/profile' %></li>
+              <li><%= link_to 'my reviews', '/reviews/my_reviews' %></li>
+              <li class="divider"></li>
+              <li><%= link_to 'Log Out', '/logout' %></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+
+<% if flash[:error] %>
+  <div id="flash-error" class="alert alert-error">
+    <button class="close" data-dismiss="alert">×</button>
+    <i class="icon-remove-sign"></i>
+    <%= flash[:error] %>
+  </div>
+<% end %>
+<% if flash[:warning] %>
+  <div id="flash-error" class="alert">
+    <button class="close" data-dismiss="alert">×</button>
+    <i class="icon-info-sign"></i>
+    <%= flash[:warning] %>
+  </div>
+<% end %>
+<% if flash[:info] %>
+  <div id="flash-info" class="alert alert-info">
+    <button class="close" data-dismiss="alert">×</button>
+    <i class="icon-info-sign"></i>
+    <%= flash[:info] %>
+  </div>
+<% end %>
+<% if flash[:success] %>
+  <div id="flash-info" class="alert alert-success">
+    <button class="close" data-dismiss="alert">×</button>
+    <i class="icon-ok-sign"></i>
+    <%= flash[:success] %>
+  </div>
+<% end %>
 
 <%= yield %>
 
+<footer id="grobal-footer" class="row-fluid">
+  <div class="span12">
+    <address>
+      Copyright 2012 iGEM HokkaidoU Japan DryLab Team
+    </address>
+    <div id="grobal-footer-credits">
+      <ul>
+        <li id="grobal-footer-octocat">
+          <%= link_to image_tag('octocat.png', alt: 'Find me on Github!'), 'http://github.com/iTakeshi/bbri', target: '_blank', rel: 'tooltip', title: 'Find me on Github!' %>
+        </li>
+        <li id="grobal-footer-rails">
+          <%= link_to image_tag('rails.png', alt: 'This application is built on Rails.'), 'http://rubyonrails.org/', target: '_blank', rel: 'tooltip', title: 'This application is built on Rails' %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</div>
 </body>
 </html>

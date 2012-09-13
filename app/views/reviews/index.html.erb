@@ -1,0 +1,25 @@
+<div class="row-fluid">
+  <div class="span4">
+    <h2>Hottest Reviews</h2>
+    <% @reviews = @hottest_reviews %>
+    <ul>
+      <%= render partial: @reviews %>
+    </ul>
+  </div>
+
+  <div class="span4">
+    <h2>Latest Reviews</h2>
+    <% @reviews = @latest_reviews %>
+    <ul>
+      <%= render partial: @reviews %>
+    </ul>
+  </div>
+
+  <div class="span4">
+    <h2>Random pickup</h2>
+    <% @reviews = @random_reviews %>
+    <ul>
+      <%= render partial: @reviews %>
+    </ul>
+  </div>
+</div>
