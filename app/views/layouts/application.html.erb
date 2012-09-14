@@ -11,22 +11,25 @@
   <![endif]-->
 </head>
 <body>
+<div class="container-fluid">
+
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container-fluid">
       <a class="brand" href="/">Biobrick Reviews & Issues</a>
-      <nav class="nav-collapse collapse">
+      <nav class="nav pull-left">
         <ul class="nav">
-          <li class="<%= @score_ranking_page %>"><a href="/">Score Ranking</a></li>
-          <li class="<%= @hot_parts_page %>"><a href="/hot_parts">Hot Parts</a></li>
-          <li class="<%= @review_ranking_page %>"><a href="/reviews">Hot Reviews</a></li>
-          <li class="<%= @issue_ranking_page %>"><a href="/issues">Hot Issues</a></li>
+          <li class="<%= @score_ranking_page %>"><a href="/">Parts Ranking</a></li>
           <li class="<%= @team_page %>"><a href="/teams">Teams</a></li>
+          <li class="<%= @type_page %>"><a href="/types">Teams</a></li>
+          <li class="<%= @review_ranking_page %>"><a href="/reviews">Hot Reviews</a></li>
         </ul>
         <form action="/search" class="navbar-search", method="get">
           <%= text_field_tag :query, nil, class: 'search-query', placeholder: 'Find parts by name' %>
         </form>
-        <ul class="nav pull-right">
+      </nav>
+      <nav class="nav pull-right">
+        <ul class="nav">
           <li class="dropdown <%= @user_page %>" id="user-menu">
             <% user_name = ( current_user ? current_user.user_name : 'guest' ) %>
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i><span id="current-user-name"><%= user_name %></span><span class="caret"></span></a>
@@ -42,8 +45,6 @@
     </div>
   </div>
 </div>
-
-<div class="container-fluid">
 
 <% if flash[:error] %>
   <div id="flash-error" class="alert alert-error">
