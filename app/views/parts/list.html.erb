@@ -2,9 +2,12 @@
 
 <% if @right_part %>
   <h2>Are you feeling lucky?</h2>
-  <h3><%= link_to @right_part.part_identifier, "/parts/#{@right_part.part_identifier}" %></h3>
+  <ul><li>
+    <h3><%= link_to @right_part.part_identifier, "/parts/#{@right_part.part_identifier}" %></h3>
+    <span class="part-description"><%= @right_part.part_description %></span>
+  </li></ul>
 
-  <h2>Other Search Resulut</h2>
+  <h2>Other Search Result</h2>
 <% end %>
 
 <ul class="pager">
@@ -22,6 +25,7 @@
   <% @parts.each do |part| %>
     <li>
       <h3><%= link_to part.part_identifier, "/parts/#{part.part_identifier}" %></h3>
+      <span class="part-description"><%= part.part_description %></span>
     </li>
   <% end %>
 </ul>

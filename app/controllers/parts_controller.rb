@@ -38,10 +38,16 @@ class PartsController < ApplicationController
             @error_count += 1
             next
           end
+          begin
+            part_description = part_info.css('td')[4].children[0].text.strip
+          rescue NoMethodError
+            part_description = ""
+          end
           part_record = team_record.parts.create(
             part_year: year,
             part_type_id: part_type_record.id,
-            part_identifier: part_identifier
+            part_identifier: part_identifier,
+            part_description: part_description
           )
         end
       end
