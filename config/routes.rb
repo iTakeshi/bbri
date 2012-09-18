@@ -5,6 +5,7 @@ Bbri::Application.routes.draw do
   get '/search', to: 'parts#search'
   get '/parts/:part_identifier', to: 'parts#show'
   get '/parts/team_parts/:team_name', to: 'parts#team_parts'
+  get '/parts/type_parts/:type_name', to: 'parts#type_parts'
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
@@ -29,6 +30,8 @@ Bbri::Application.routes.draw do
   get '/reviews/my_reviews', to: 'reviews#my_reviews'
 
   get '/teams', to: 'teams#index'
+
+  get '/types', to: 'part_types#index'
 
   root to: 'ranking#index'
 

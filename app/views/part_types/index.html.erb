@@ -1,0 +1,7 @@
+<h1>Parts Type List</h1>
+
+<ul>
+  <% @types.each do |type_name, number_of_parts| %>
+    <li><%= link_to type_name, "/parts/type_parts/#{type_name}" %> (<%= number_of_parts %>)</li>
+  <% end %>
+</ul>

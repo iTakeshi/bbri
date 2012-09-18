@@ -74,6 +74,18 @@ class PartsController < ApplicationController
     render :list
   end
 
+  # GET /parts/type_parts/:type_name
+  def type_parts
+    @type = PartType.find_by_type_name(params[:type_name])
+    all_parts = @type.parts
+    @page = (params[:page] ? params[:page].to_i : 1)
+    @page_max = (all_parts.count.to_f / 25).ceil
+    @parts = all_parts.order('id DESC').offset(25 * (@page - 1)).limit(25)
+    @page_heading = "#{@type.type_name} parts"
+    @pagenation_base_url = "/parts/type_parts/#{@type.type_name}?page="
+    render :list
+  end
+
   # GET /parts/:part_identifier
   def show
     @part = Part.find_by_part_identifier(params[:part_identifier])
