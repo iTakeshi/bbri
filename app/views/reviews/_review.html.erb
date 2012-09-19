@@ -1,7 +1,8 @@
 <li>
   <div class="review-heading">
     <% review_class = ( review.is_question ? 'question' : 'review' ) %>
-    <h3 class="<%= review_class %>"><%= review.review_title %></h3>
+    <h3 class="<%= review_class %>" style="display: inline;"><%= review.review_title %></h3>
+    <%= current_user && review.user_id == current_user.id ? link_to(raw('<i class="icon-pencil"></i>Edit'), '') : '' %><br>
     <% part_identifier = review.part.part_identifier %>
     To: <%= link_to part_identifier, "/parts/#{part_identifier}" %>, By: <%= review.user.user_name %>
     <% if current_user %>
