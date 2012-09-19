@@ -8,3 +8,19 @@
         cursor: pointer;
     }
 }
+
+h3.question:before {
+    content: "Q";
+    color: #3c3;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+h3.review:before {
+    content: "R";
+    color: #f36;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-right: 5px;
+}

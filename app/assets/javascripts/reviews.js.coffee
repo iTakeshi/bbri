@@ -14,7 +14,11 @@ $ ->
                 $('#my-review-form .alert').toggleClass('alert-error', false)
                 $('#new-review-btn').text('Edit your review')
                 $('#my-review-form').attr('method', 'put')
-                my_review = '<h3>' + response.review.review_title + '</h3>' +
+                if response.review.is_question == true
+                    review_class = 'question'
+                else
+                    review_class = 'review'
+                my_review = '<h3 class="' + review_class + '">' + response.review.review_title + '</h3>' +
                     'To: ' + $('h1').text() + ', By: ' + $('#current-user-name').text() + 
                     ' <a href="/reviews/' + response.review.id + '/good" data-remote="true" class="good-to-review"><i class="icon-thumbs-up"></i>Like </a>' +
                     '<span class="review-good-count">' + response.review.good_counter + '</span>' +

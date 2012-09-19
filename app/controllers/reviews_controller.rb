@@ -16,6 +16,7 @@ class ReviewsController < ApplicationController
     review = Review.where(user_id: current_user.id, part_id: Part.find_by_part_identifier(params[:part_identifier]).id).first_or_initialize
     review.review_title = params[:review][:review_title]
     review.review_text = params[:review][:review_text]
+    review.is_question = params[:review][:is_question]
     if review.save
       render json: { status: :success, review: review }
     else

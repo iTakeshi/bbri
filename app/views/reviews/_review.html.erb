@@ -1,7 +1,8 @@
 <li>
   <div class="review-heading">
-    <h3><%= review.review_title %></h3>
-    <%= part_identifier = review.part.part_identifier %>
+    <% review_class = ( review.is_question ? 'question' : 'review' ) %>
+    <h3 class="<%= review_class %>"><%= review.review_title %></h3>
+    <% part_identifier = review.part.part_identifier %>
     To: <%= link_to part_identifier, "/parts/#{part_identifier}" %>, By: <%= review.user.user_name %>
     <% link_text = (GoodToReviews.where(review_id: review.id, user_id: current_user.id).first ? '<i class="icon-thumbs-down"></i>Unlike ' : '<i class="icon-thumbs-up"></i>Like ') %>
     <%= link_to raw(link_text), "/reviews/#{review.id}/good", class: 'good-to-review', remote: true %>
