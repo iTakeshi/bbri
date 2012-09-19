@@ -1,6 +1,7 @@
 # coding: utf-8
 
 class PartsController < ApplicationController
+  before_filter :authorize, only: [:new, :create]
 
   # GET /parts/register
   def new

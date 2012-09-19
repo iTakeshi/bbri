@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_filter :authorize, only: [:create_or_update, :good, :my_reviews]
 
   # GET /reviews
   def index
