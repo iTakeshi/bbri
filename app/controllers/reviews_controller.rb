@@ -12,12 +12,36 @@ class ReviewsController < ApplicationController
     @hottest_reviews = Review.order('good_counter DESC').limit(25)
   end
 
-  # MATCH /parts/:part_identifier/user_review
-  def create_or_update
-    review = Review.where(user_id: current_user.id, part_id: Part.find_by_part_identifier(params[:part_identifier]).id).first_or_initialize
+  # GET /parts/:part_identifier/reviews/form/(:review_id)
+  def render_review_form
+    @review = Review.find(params[:review_id])
+  end
+
+  # POST /parts/:part_identifier/reviews/new
+  def create
+    review = Review.new(
+      review_title: params[:review][:review_title],
+      review_text: params[:review][:review_text],
+      is_question: params[:review][:is_question],
+      user_id: current_user.id,
+      part_id: Part.find_by_part_identifier(params[:part_id]).id
+    )
+    if review.save
+      render json: { status: :success, review: review }
+    else
+      render json: { status: :error }
+    end
+  end
+
+  # PUT /parts/:part_identifier/reviews/:review_id/edit
+  def update
+    review = Review.where(
+      user_id: current_user.id,
+      part_id: Part.find_by_part_identifier(params[:part_identifier]).id,
+      is_question: false
+    ).first
     review.review_title = params[:review][:review_title]
     review.review_text = params[:review][:review_text]
-    review.is_question = params[:review][:is_question]
     if review.save
       render json: { status: :success, review: review }
     else
