@@ -96,7 +96,9 @@ class PartsController < ApplicationController
   # GET /parts/:part_identifier
   def show
     @part = Part.find_by_part_identifier(params[:part_identifier])
-    @my_review = Review.where(part_id: @part.id, user_id: current_user.id, is_question: false)
-    @my_questions = Review.where(part_id: @part.id, user_id: current_user.id, is_question: true)
+    if current_user
+      @my_review = Review.where(part_id: @part.id, user_id: current_user.id, is_question: false)
+      @my_questions = Review.where(part_id: @part.id, user_id: current_user.id, is_question: true)
+    end
   end
 end
