@@ -1,8 +1,8 @@
-<li>
+<li style="margin-bottom: 20px">
   <div class="review-heading">
     <% review_class = ( review.is_question ? 'question' : 'review' ) %>
     <h3 class="<%= review_class %>" style="display: inline;"><%= review.review_title %></h3>
-    <%= current_user && review.user_id == current_user.id ? link_to(raw('<i class="icon-pencil"></i>Edit'), '') : '' %><br>
+    <%= current_user && review.user_id == current_user.id ? link_to(raw('<i class="icon-pencil"></i>Edit'), "/reviews/#{review.id}/edit", remote: true, class: 'edit-my-review') : '' %><br>
     <% part_identifier = review.part.part_identifier %>
     To: <%= link_to part_identifier, "/parts/#{part_identifier}" %>, By: <%= review.user.user_name %>
     <% if current_user %>
@@ -12,7 +12,7 @@
       <i class="icon-thumbs-up"></i>Like&nbsp;
     <% end %>
     <span class="review-good-count"><%= review.good_counter %></span>
-    <%= current_user ? '' : link_to('Login before saying "Like!" to this review.', '/login') %>
+    <%= current_user ? '' : link_to('Login to say "Like!"', '/login') %>
   </div>
   <div class="review-body" data-review-id="<%= review.id %>">
     <pre><%= review.review_text %></pre>
