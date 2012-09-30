@@ -4,7 +4,7 @@
 </div>
 
 <div class="modal-body" style="max-height: 680px !important;">
-  <%= form_for @review, url: @review_path, html: { class: 'form-horizontal', remote: true } do |f| %>
+  <%= form_for @review, url: @review_path, html: { class: 'form-horizontal', id: 'review-form', remote: true } do |f| %>
     <fieldset>
       <%= f.hidden_field :is_question %>
       <%= f.hidden_field :part_id %>

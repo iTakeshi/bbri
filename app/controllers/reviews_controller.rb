@@ -36,7 +36,7 @@ class ReviewsController < ApplicationController
     review = Review.new(params[:review])
     review.user_id = current_user.id
     if review.save
-      render json: { status: :success, review: review }
+      render json: { status: :success, review: review, new_record: :true, part_identifier: review.part.part_identifier, user: review.user.user_name }
     else
       render json: { status: :error }
     end
@@ -48,7 +48,7 @@ class ReviewsController < ApplicationController
     review.review_title = params[:review][:review_title]
     review.review_text = params[:review][:review_text]
     if review.save
-      render json: { status: :success, review: review }
+      render json: { status: :success, review: review, new_record: :false, part_identifier: review.part.part_identifier, user: review.user.user_name }
     else
       render json: { status: :error }
     end

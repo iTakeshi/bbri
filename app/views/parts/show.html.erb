@@ -14,14 +14,15 @@
       <h3>Your Review</h3>
       <% if @my_review.first %>
         <%= link_to 'Edit your review', "/reviews/#{@my_review.first.id}/edit", remote: true, class: 'edit-my-review btn btn-primary' %>
-        <ul><%= render partial: @my_review.first %></ul>
+        <ul id="my-review"><%= render partial: @my_review.first %></ul>
       <% else %>
         <%= link_to 'Post your review!', "/parts/#{@part.part_identifier}/reviews/new?type=review", remote: true, class: 'edit-my-review btn btn-primary' %>
+        <ul id="my-review"></ul>
       <% end %>
 
       <h3>Your Questions</h3>
       <%= link_to 'New Question', "/parts/#{@part.part_identifier}/reviews/new?type=question", remote: true, class: 'edit-my-review btn btn-primary' %>
-      <ul>
+      <ul id="my-questions">
         <%= render partial: @my_questions %>
       </ul>
     <% else %>
