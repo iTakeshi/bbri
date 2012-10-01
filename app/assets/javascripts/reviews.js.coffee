@@ -46,7 +46,9 @@ $ ->
         $li_review = $('li[data-review-id="' + response.review.id + '"]')
         $li_review.html('<div class="review-heading"><h3 class="' + review_class + '">' + response.review.review_title + '</h3>' +
             '<a href="/reviews/' + response.review.id + '/edit" data-remote="true" class="edit-my-review"><i class="icon-pencil"></i>Edit</a><br>' +
+            '<div class="review-properties">' +
             'To: <a href="/parts/' + response.part_identifier + '">' + response.part_identifier + '</a>, By: ' + response.user +
             '<a href="/reviews/' + response.review.id + '/good" class="good-to-review" data-remote="true"><i class="icon-thumbs-up"></i>Like </a>' +
-            '<span class="review-good-count">0</span></div>' +
+            '<span class="review-good-count">0</span>' +
+            '<span class="review-time">' + response.time + '</div></div>' +
             '<div class="review-body"><pre>' + response.review.review_text + '</pre></div>')

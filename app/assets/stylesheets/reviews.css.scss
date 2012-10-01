@@ -30,5 +30,15 @@
             font-weight: bold;
             margin-right: 5px;
         }
+
+        .review-properties {
+            position: relative;
+
+            .review-time {
+                display: inline-block;
+                position: absolute;
+                right: 0;
+            }
+        }
     }
 }
