@@ -17,6 +17,8 @@
   <div class="review-body">
     <pre><%= review.review_text %></pre>
     <div class="review-comments">
+      <ul class="comments-ul">
+      </ul>
       <% if current_user %>
         <%= link_to 'Leave Comments...', "/reviews/#{review.id}/comments/new", class: 'comment-to-review', remote: true %>
         <div class="comment-form-wrapper">

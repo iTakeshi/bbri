@@ -5,6 +5,15 @@
 $ ->
     $('.review-heading').live 'click', (event) ->
         $(@).next('.review-body').animate({ height: 'toggle', opacity: 'toggle' }, 'fast')
+        $review_li = $(@).closest('.review-list')
+        $.ajax
+            type: 'GET'
+            scriptCharset: 'utf-8'
+            dataType: 'html'
+            url: '/reviews/' + $review_li.attr('data-review-id') + '/comments'
+            success: (res) ->
+                console.log $review_li
+                $review_li.find('ul').html(res)
 
     $('.good-to-review').live 'ajax:complete', (event, ajax, status) ->
         response = $.parseJSON(ajax.responseText)

@@ -3,6 +3,28 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .review-comments {
+    .comment-header {
+        position: relative;
+        height: 1.5em;
+
+        span {
+            display: inline-block;
+            position: absolute;
+        }
+
+        .comment-user {
+            left: 0;
+        }
+
+        .comment-time {
+            right: 0;
+        }
+    }
+
+    pre {
+        margin-bottom: 10px;
+    }
+
     form {
         margin-top: 5px;
         width: 100%;

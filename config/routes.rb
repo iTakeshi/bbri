@@ -33,6 +33,7 @@ Bbri::Application.routes.draw do
   get '/reviews/:review_id/good', to: 'reviews#good'
   get '/reviews/my_reviews', to: 'reviews#my_reviews'
 
+  get '/reviews/:review_id/comments', to: 'comments#index'
   get '/reviews/:review_id/comments/new', to: 'comments#new'
   post '/comments/create', to: 'comments#create'
 

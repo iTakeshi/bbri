@@ -1,6 +1,12 @@
 class CommentsController < ApplicationController
   before_filter :authorize
 
+  # GET /reviews/:review_id/comments
+  def index
+    @comments = Review.find(params[:review_id]).comments
+    render :index, layout: false
+  end
+
   # GET /reviews/:review_id/comments/new
   def new
     @comment = Review.find(params[:review_id]).comments.new

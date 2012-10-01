@@ -10,7 +10,8 @@ class Comment < ActiveRecord::Base
     presence: true
 
   validates :comment_text,
-    presence: { message: "You can't send a blank comment." }
+    presence: { message: "You can't send a blank comment." },
+    uniqueness: { scope: [ :review_id, :user_id ] }
 
   validates :good_counter,
     presence: true
