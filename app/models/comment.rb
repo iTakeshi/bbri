@@ -1,4 +1,5 @@
 class Comment < ActiveRecord::Base
+  belongs_to :user
   belongs_to :review
   attr_accessible :comment_text, :good_counter, :review_id
 

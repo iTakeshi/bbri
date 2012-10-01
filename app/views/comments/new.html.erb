@@ -1,0 +1,6 @@
+<%= form_for @comment, url: 'comments/create', html: { remote: true, class: 'comment-form' } do |f| %>
+  <%= f.hidden_field :review_id %>
+
+  <%= f.text_area :comment_text, praceholder: 'Leave your comment...' %>
+  <%= f.submit 'submit', class: 'btn btn-mini btn-primary' %>
+<% end %>
