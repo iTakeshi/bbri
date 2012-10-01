@@ -1,6 +1,7 @@
 # coding: utf-8
 
 class PartsController < ApplicationController
+  before_filter :authorize, only: [:new, :create]
 
   # GET /parts/register
   def new
@@ -38,10 +39,16 @@ class PartsController < ApplicationController
             @error_count += 1
             next
           end
+          begin
+            part_description = part_info.css('td')[4].children[0].text.strip
+          rescue NoMethodError
+            part_description = ""
+          end
           part_record = team_record.parts.create(
             part_year: year,
             part_type_id: part_type_record.id,
-            part_identifier: part_identifier
+            part_identifier: part_identifier,
+            part_description: part_description
           )
         end
       end
@@ -74,8 +81,24 @@ class PartsController < ApplicationController
     render :list
   end
 
+  # GET /parts/type_parts/:type_name
+  def type_parts
+    @type = PartType.find_by_type_name(params[:type_name])
+    all_parts = @type.parts
+    @page = (params[:page] ? params[:page].to_i : 1)
+    @page_max = (all_parts.count.to_f / 25).ceil
+    @parts = all_parts.order('id DESC').offset(25 * (@page - 1)).limit(25)
+    @page_heading = "#{@type.type_name} parts"
+    @pagenation_base_url = "/parts/type_parts/#{@type.type_name}?page="
+    render :list
+  end
+
   # GET /parts/:part_identifier
   def show
     @part = Part.find_by_part_identifier(params[:part_identifier])
+    if current_user
+      @my_review = Review.where(part_id: @part.id, user_id: current_user.id, is_question: false)
+      @my_questions = Review.where(part_id: @part.id, user_id: current_user.id, is_question: true)
+    end
   end
 end

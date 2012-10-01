@@ -5,6 +5,7 @@ Bbri::Application.routes.draw do
   get '/search', to: 'parts#search'
   get '/parts/:part_identifier', to: 'parts#show'
   get '/parts/team_parts/:team_name', to: 'parts#team_parts'
+  get '/parts/type_parts/:type_name', to: 'parts#type_parts'
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
@@ -25,10 +26,16 @@ Bbri::Application.routes.draw do
   match '/parts/:part_identifier/user_review', to: 'reviews#create_or_update'
 
   get '/reviews', to: 'reviews#index'
+  get '/parts/:part_identifier/reviews/new', to: 'reviews#new'
+  post '/parts/:part_identifier/reviews/create', to: 'reviews#create'
+  get '/reviews/:review_id/edit', to: 'reviews#edit'
+  put '/reviews/:review_id/update', to: 'reviews#update'
   get '/reviews/:review_id/good', to: 'reviews#good'
   get '/reviews/my_reviews', to: 'reviews#my_reviews'
 
   get '/teams', to: 'teams#index'
+
+  get '/types', to: 'part_types#index'
 
   root to: 'ranking#index'
 

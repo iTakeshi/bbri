@@ -16,6 +16,11 @@ form {
         background: -o-linear-gradient(top, #f5f5f5, #ffffff);
         background: -ms-linear-gradient(top, #f5f5f5, #ffffff);
     }
+
+    .control-notes {
+        display: inline-block;
+        padding-top: 5px;
+    }
 }
 
 #grobal-footer {

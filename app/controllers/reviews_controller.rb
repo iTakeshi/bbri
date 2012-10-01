@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_filter :authorize, only: [:create_or_update, :good, :my_reviews]
 
   # GET /reviews
   def index
@@ -11,13 +12,43 @@ class ReviewsController < ApplicationController
     @hottest_reviews = Review.order('good_counter DESC').limit(25)
   end
 
-  # MATCH /parts/:part_identifier/user_review
-  def create_or_update
-    review = Review.where(user_id: current_user.id, part_id: Part.find_by_part_identifier(params[:part_identifier]).id).first_or_initialize
+  # GET /parts/:part_identifier/reviews/new
+  def new
+    @review = Part.find_by_part_identifier(params[:part_identifier]).reviews.new
+    if params[:type] == 'question'
+      @review.is_question = true
+    else
+      @review.is_question = false
+    end
+    @review_path = "/parts/#{params[:part_identifier]}/reviews/create"
+    render :review_form, layout: nil
+  end
+
+  # GET /reviews/:review_id/edit
+  def edit
+    @review = Review.find(params[:review_id])
+    @review_path = "/reviews/#{@review.id}/update"
+    render :review_form, layout: nil
+  end
+
+  # POST /parts/:part_identifier/reviews/create
+  def create
+    review = Review.new(params[:review])
+    review.user_id = current_user.id
+    if review.save
+      render json: { status: :success, review: review, new_record: :true, part_identifier: review.part.part_identifier, user: review.user.user_name }
+    else
+      render json: { status: :error }
+    end
+  end
+
+  # POST /reviews/:review_id/update
+  def update
+    review = Review.find(params[:review_id])
     review.review_title = params[:review][:review_title]
     review.review_text = params[:review][:review_text]
     if review.save
-      render json: { status: :success, review: review }
+      render json: { status: :success, review: review, new_record: :false, part_identifier: review.part.part_identifier, user: review.user.user_name }
     else
       render json: { status: :error }
     end

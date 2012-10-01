@@ -1,0 +1,34 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h3><%= @review.id ? 'Edit' : 'Post' %> your <%= @review.is_question ? 'question' : 'review' %></h3>
+</div>
+
+<div class="modal-body" style="max-height: 680px !important;">
+  <%= form_for @review, url: @review_path, html: { class: 'form-horizontal', id: 'review-form', remote: true } do |f| %>
+    <fieldset>
+      <%= f.hidden_field :is_question %>
+      <%= f.hidden_field :part_id %>
+      <div class="control-group">
+        <div class="controls alert alert-info">Both "Title" and "Text" are required.</div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :review_title, 'Title of review', class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :review_title, style: 'width: 25em;' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :review_text, 'Review text', class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_area :review_text, style: 'width: 40em; height: 15em;' %>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit 'submit', class: 'btn btn-primary' %>
+      </div>
+    </fieldset>
+  <% end %>
+</div>
