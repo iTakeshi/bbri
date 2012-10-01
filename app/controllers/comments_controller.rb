@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.user_id = current_user.id
     if @comment.save
-      render json: { status: :success, comment: @comment, user_name: @comment.user.user_name }
+      render json: { status: :success, comment: @comment, user_name: @comment.user.user_name, time: @comment.created_at.strftime("%Y.%m.%d %H:%M") }
     else
       render json: { status: :error }
     end
