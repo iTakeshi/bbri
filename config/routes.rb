@@ -33,11 +33,16 @@ Bbri::Application.routes.draw do
   get '/reviews/:review_id/good', to: 'reviews#good'
   get '/reviews/my_reviews', to: 'reviews#my_reviews'
 
+  get '/reviews/:review_id/comments', to: 'comments#index'
+  get '/reviews/:review_id/comments/new', to: 'comments#new'
+  post '/comments/create', to: 'comments#create'
+
   get '/teams', to: 'teams#index'
 
   get '/types', to: 'part_types#index'
 
-  root to: 'ranking#index'
+  get '/ranking', to: 'ranking#index'
+  root to: 'reviews#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

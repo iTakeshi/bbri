@@ -2,6 +2,7 @@ class Review < ActiveRecord::Base
   belongs_to :user
   belongs_to :part
   has_many :good_to_reviews
+  has_many :comments
   attr_accessible :part_id, :review_text, :review_title, :user_id, :is_question
 
   validates :part_id,

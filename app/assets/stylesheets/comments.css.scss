@@ -1,0 +1,38 @@
+// Place all the styles related to the comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.review-comments {
+    .comment-header {
+        position: relative;
+        height: 1.5em;
+
+        span {
+            display: inline-block;
+            position: absolute;
+        }
+
+        .comment-user {
+            left: 0;
+        }
+
+        .comment-time {
+            right: 0;
+        }
+    }
+
+    pre {
+        margin-bottom: 10px;
+    }
+
+    form {
+        margin-top: 5px;
+        width: 100%;
+
+        textarea {
+            display: block;
+            width: 100%;
+            height: 5em;
+        }
+    }
+}

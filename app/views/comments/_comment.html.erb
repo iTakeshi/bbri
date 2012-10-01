@@ -1,0 +1,7 @@
+<li class="comment-list" data-comment-id="<%= comment.id %>">
+  <div class="comment-header">
+    <span class="comment-user"><%= comment.user.user_name %></span>
+    <span class="comment-time"><%= comment.created_at.strftime("%Y.%m.%d %H:%M") %></span>
+  </div>
+  <pre><%= comment.comment_text %></pre>
+</li>
