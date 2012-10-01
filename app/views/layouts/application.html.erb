@@ -19,10 +19,10 @@
       <a class="brand" href="/">Biobrick Reviews</a>
       <nav class="nav pull-left">
         <ul class="nav">
-          <li class="<%= @score_ranking_page %>"><a href="/">Parts Ranking</a></li>
+          <li class="<%= @score_ranking_page %>"><a href="/ranking">Parts Ranking</a></li>
           <li class="<%= @team_page %>"><a href="/teams">Teams</a></li>
           <li class="<%= @type_page %>"><a href="/types">Types</a></li>
-          <li class="<%= @review_ranking_page %>"><a href="/reviews">Hot Reviews</a></li>
+          <li class="<%= @review_ranking_page %>"><a href="/">Hot Reviews</a></li>
         </ul>
         <form action="/search" class="navbar-search", method="get">
           <%= text_field_tag :query, nil, class: 'search-query', placeholder: 'Find parts by name' %>

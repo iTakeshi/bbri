@@ -41,7 +41,8 @@ Bbri::Application.routes.draw do
 
   get '/types', to: 'part_types#index'
 
-  root to: 'ranking#index'
+  get '/ranking', to: 'ranking#index'
+  root to: 'reviews#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
