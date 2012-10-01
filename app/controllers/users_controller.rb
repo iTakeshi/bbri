@@ -13,7 +13,6 @@ class UsersController < ApplicationController
     @user.user_status = 1
     if @user.save
       @user.send_signup_confirmation
-      redirect_to '/login'
     else
       render :new
     end
