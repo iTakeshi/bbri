@@ -2,7 +2,7 @@ ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
 
 set :scm, :git
-set :repository, "git@github.com:iTakeshi/bbri.git"
+set :repository, "git://github.com/iTakeshi/bbri.git"
 
 set :deploy_via, :remote_cache
 set :scm_verbose, true
@@ -12,7 +12,6 @@ set :rails_env, :production
 set :application, 'bbreview'
 
 task :staging do
-  ssh_options[:port] = '11122'
   set :user, 'itakeshi'
   set :domain, 'igem.itakeshi.net'
   set :port, '11122'
@@ -25,20 +24,22 @@ task :staging do
 end
 
 task :production do
-  ssh_options[:port] = '22'
+  ssh_options[:port] = '11122'
   puts "\n\e[0;31m Are you REALLY sure you want to deploy to production? \e[0m\n"
   proceed = STDIN.gets[0..0] rescue nil
   exit unless proceed == 'y' || proceed == 'Y'
 
+=begin
   set :default_environment, {
     'PATH' => '/home/ruby-passenger/.rvm/gems/ruby-1.9.3-p194@global/bin:/home/ruby-passenger/.rvm/gems/ruby-1.9.3-p194/bin:/home/ruby-passenger/.rvm/rubies/ruby-1.9.3-p194/bin:/home/ruby-passenger/.rvm/bin:$PATH',
     'GEM_HOME' => '/home/ruby-passenger/.rvm/gems/ruby-1.9.3-p194',
     'GEM_PATH' => '/home/ruby-passenger/.rvm/gems/ruby-1.9.3-p194:/home/ruby-passenger/.rvm/gems/ruby-1.9.3-p194@global',
     'BUNDLE_PATH' => '/home/ruby-passenger/.rvm/gems/ruby-1.9.3-p194/bin'
   }
-  set :user, 'ruby-passenger'
-  set :domain, '133.50.171.168'
-  set :port, '22'
+=end
+  set :user, 'itakeshi'
+  set :domain, 'www.bbreview.net'
+  set :port, '11122'
   set :branch, 'master'
 
   set :deploy_to, "/var/app/rails/#{application}"

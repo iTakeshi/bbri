@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :authorize
+  before_filter :authorize, except: :index
 
   # GET /reviews/:review_id/comments
   def index
