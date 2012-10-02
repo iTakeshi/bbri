@@ -1,5 +1,19 @@
-<h1>Under construction</h1>
-<p>
-  We are sorry, but "Biobrick Evaluation" and "Biobrick Ranking" are under development.<br>
-  We will release them shortly.
-</p>
+<h1>Biobrick Rankings</h1>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h2>Hottest Biobricks</h2>
+    <p>You can see which biobrick is most reviewed.</p>
+    <ul class="ranking-ul">
+      <% @hottest_parts[0..14].each.with_index do |v, i| %>
+        <li>
+          <h3>No.<%= i + 1 %></h3>
+          <h4><%= link_to v[0], "/parts/#{v[0]}" %></h4>
+          <span class="ranking-review-count"><%= v[1] %> reviews</span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="span6">
+  </div>
+</div>
