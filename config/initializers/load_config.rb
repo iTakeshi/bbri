@@ -1,6 +1,6 @@
 APP_CONFIG = YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env]
 
-HokuiNet::Application.configure do
+Bbri::Application.configure do
   # SMTP server configuration.
   if Rails.env == 'production'
     config.action_mailer.delivery_method = :smtp
