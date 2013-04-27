@@ -2,3 +2,4 @@ production:
   gmail:
     user: username
     pass: password
+  server_name: 'www.bbreview.net'
